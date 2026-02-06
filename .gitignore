@@ -1,0 +1,16 @@
+# Nix/Direnv artifacts
+result
+result-*
+.direnv/
+shell.nix
+
+# Local convenience symlinks (auto-generated)
+*-bin
+*-lib
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Submodule directories are tracked, but their contents are managed by their own repos.
+# (Git already handles this via submodules)
