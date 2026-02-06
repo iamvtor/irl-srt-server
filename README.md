@@ -45,12 +45,20 @@ nix run .#srtla -- --srtla_port 5000 --srt_port 4002
 ### Persistent Services (NixOS Only)
 The most robust way to run these on NixOS is using the provided **NixOS Module**. This ensures they start on boot and auto-restart if they crash.
 
-1.  **Import the module** in your `configuration.nix` or your system flake:
+1.  **Add to your system's `flake.nix` inputs**:
     ```nix
-    { config, pkgs, ... }: {
-      imports = [
-        (import /path/to/this/workspace/flake.nix).nixosModules.default
-      ];
+    {
+      inputs.irl-srt-server.url = "github:your-username/irl-srt-server";
+      # Or local path: "path:/home/vtor/projects/irl-srt-server"
+
+      outputs = { self, nixpkgs, irl-srt-server, ... }: {
+        nixosConfigurations.your-host = nixpkgs.lib.nixosSystem {
+          modules = [
+            irl-srt-server.nixosModules.default
+            ./configuration.nix
+          ];
+        };
+      };
     }
     ```
 
