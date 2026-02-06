@@ -94,6 +94,10 @@
               cp -r ${httplib-src}/* lib/cpp-httplib/
               cp -r ${cxxurl-src}/* lib/CxxUrl/
               chmod -R +w lib/
+
+              # Fix log file path in default config to be writable
+              substituteInPlace src/sls.conf \
+                --replace-fail "log_file logs/srt_server.log;" "log_file /var/log/sls_server.log;"
             '';
 
             cmakeFlags = [
