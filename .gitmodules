@@ -1,0 +1,10 @@
+[submodule "sls"]
+	path = sls
+	url = https://github.com/irlserver/irl-srt-server.git
+[submodule "srt"]
+	path = srt
+	url = https://github.com/irlserver/srt.git
+	branch = belabox
+[submodule "srtla"]
+	path = srtla
+	url = https://github.com/irlserver/srtla.git
