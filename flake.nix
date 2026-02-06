@@ -108,8 +108,9 @@
             ];
 
             installPhase = ''
-              mkdir -p $out/bin
+              mkdir -p $out/bin $out/etc
               cp bin/* $out/bin/
+              cp src/sls.conf $out/etc/sls.conf
             '';
           };
 
@@ -133,7 +134,7 @@
             package = lib.mkOption { type = lib.types.package; default = flakePkgs.sls; };
             configPath = lib.mkOption { 
               type = lib.types.path; 
-              default = "${sls-src}/src/sls.conf"; 
+              default = "${flakePkgs.sls}/etc/sls.conf"; 
             };
             srtla = {
               enable = lib.mkOption { type = lib.types.bool; default = true; };
