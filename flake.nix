@@ -95,9 +95,11 @@
               cp -r ${cxxurl-src}/* lib/CxxUrl/
               chmod -R +w lib/
 
-              # Fix log file path in default config to be writable
+              # Fix log file path in default config and ensure Unix line endings
+              tr -d '\r' < src/sls.conf > src/sls.conf.tmp
+              mv src/sls.conf.tmp src/sls.conf
               substituteInPlace src/sls.conf \
-                --replace-fail "log_file logs/srt_server.log;" "log_file /var/log/sls_server.log;"
+                --replace-fail "log_file logs/srt_server.log;" "log_file /var/log/sls/srt_server.log;"
             '';
 
             cmakeFlags = [
@@ -151,6 +153,7 @@
                 Restart = "always";
                 DynamicUser = true;
                 StateDirectory = "sls";
+                LogsDirectory = "sls";
                 WorkingDirectory = "/var/lib/sls";
               };
             };
