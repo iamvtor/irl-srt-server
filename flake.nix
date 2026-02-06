@@ -109,8 +109,9 @@
 
             installPhase = ''
               mkdir -p $out/bin $out/etc
-              cp bin/* $out/bin/
-              cp src/sls.conf $out/etc/sls.conf
+              cp bin/srt_server $out/bin/
+              cp bin/srt_client $out/bin/
+              cp ../src/sls.conf $out/etc/sls.conf
             '';
           };
 
